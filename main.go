@@ -9,5 +9,5 @@ import (
 
 func main() {
 	c := config.New()
-	draw.New(c)
+	draw.New(c).Build()
 }

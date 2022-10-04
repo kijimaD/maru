@@ -11,6 +11,10 @@ import (
 	"maru/utils"
 )
 
+type Config struct {
+	Langs map[string]Lang
+}
+
 type Lang struct {
 	// hex code
 	color string
@@ -19,7 +23,13 @@ type Lang struct {
 const langSrcFile = "languages.yml"
 const langSrcURL = "https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml"
 
-func GetGithubColors() map[string]Lang {
+func New() *Config {
+	return &Config {
+		Langs: getGithubColors(),
+	}
+}
+
+func getGithubColors() map[string]Lang {
 	m := readFile()
 	langMap := make(map[string]Lang)
 	fmt.Printf("Find %v languages in Github\n", len(m))

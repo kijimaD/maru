@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	config.GetGithubColors()
+	config.New()
 }

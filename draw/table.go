@@ -41,7 +41,8 @@ func (d Draw) colorHeader() []string {
 	return []string{
 		"Lang",
 		"color",
-		"Image",
+		"dot",
+		"banner",
 	}
 }
 
@@ -49,6 +50,7 @@ func (d Draw) colorContent(name string, color string) []string {
 	return []string{
 		name,
 		fmt.Sprintf("%v", color),
-		fmt.Sprintf("![%v](https://raw.githubusercontent.com/kijimaD/maru/main/images/%v.svg)", name, name),
+		fmt.Sprintf("![%v](https://raw.githubusercontent.com/kijimaD/maru/main/images/dot/%v.svg)", name, name),
+		fmt.Sprintf("![%v](https://raw.githubusercontent.com/kijimaD/maru/main/images/banner/%v.svg)", name, name),
 	}
 }

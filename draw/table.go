@@ -40,6 +40,7 @@ func (d Draw) colorTable(w io.Writer) {
 func (d Draw) colorHeader() []string {
 	return []string{
 		"Lang",
+		"color",
 		"Image",
 	}
 }
@@ -47,6 +48,7 @@ func (d Draw) colorHeader() []string {
 func (d Draw) colorContent(name string, color string) []string {
 	return []string{
 		name,
+		fmt.Sprintf("%v", color),
 		fmt.Sprintf("![%v](https://raw.githubusercontent.com/kijimaD/maru/main/images/%v.svg)", name, name),
 	}
 }

@@ -13,9 +13,12 @@ import (
 )
 
 type Lang struct {
-	//color hex code, language url
-	color, url string
+	// hex code
+	color string
 }
+
+const langSrcFile = "languages.yml"
+const langSrcURL = "https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml"
 
 func main() {
 	GetGithubColors()
@@ -33,22 +36,23 @@ func GetGithubColors() map[string]Lang {
 		//remove space from name
 		newName := strings.Replace(name, " ", "-", -1)
 		if okk && ok {
-			langMap[newName] = Lang{stringColor, fmt.Sprintf("https://github.com/trending?l=%s", newName)}
+			langMap[newName] = Lang{stringColor}
 		} else {
-			langMap[newName] = Lang{"", fmt.Sprintf("https://github.com/trending?l=%s", newName)}
+			langMap[newName] = Lang{""}
 		}
 	}
 	return langMap
 }
 
 func readFile() map[string]interface{} {
-	if _, err := os.Stat("language.yml"); os.IsNotExist(err) {
+	// ファイルが存在すればダウンロードしない
+	if _, err := os.Stat(langSrcFile); os.IsNotExist(err) {
 		fmt.Println("start downloading...")
-		downloadFile("language.yml", "https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml")
+		downloadFile(langSrcFile, langSrcURL)
 	}
 
 	m := make(map[string]interface{})
-	ymlBytes, err := ioutil.ReadFile("language.yml")
+	ymlBytes, err := ioutil.ReadFile(langSrcFile)
 	checkErr(err)
 
 	err = yaml.Unmarshal(ymlBytes, m)

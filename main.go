@@ -4,8 +4,10 @@ package main
 
 import (
 	"maru/config"
+	"maru/draw"
 )
 
 func main() {
-	config.New()
+	c := config.New()
+	draw.New(c)
 }

@@ -23,8 +23,8 @@ type Lang struct {
 const langSrcFile = "languages.yml"
 const langSrcURL = "https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml"
 
-func New() *Config {
-	return &Config {
+func New() Config {
+	return Config {
 		Langs: getGithubColors(),
 	}
 }

@@ -26,6 +26,7 @@ func (d Draw) Build() {
 		d.banner(fmt.Sprintf("images/banner/%v.svg", k), v.Color, k)
 	}
 	d.blankDot(fmt.Sprintf("images/dot/None.svg"), "#000000")
+	d.blankBanner(fmt.Sprintf("images/banner/None.svg"), "#000000", "None")
 }
 
 func (d Draw) clean() {
@@ -58,6 +59,18 @@ func (d Draw) dot(filePath string, color string) {
 	s.End()
 }
 
+func (d Draw) blankBanner(filePath string, color string, lang string) {
+	out, err := os.Create(filePath)
+	utils.CheckErr(err)
+	s := svg.New(out)
+	s.Start(8 + len(lang) * 7, 18)
+	s.Roundrect(0, 0, 8 + len(lang) * 7, 18, 4, 4, fmt.Sprintf("fill:none;stroke:%v;", color))
+	s.Gstyle("font-family:monospace;font-weight:bold;")
+	s.Text(4 + len(lang) * 7 / 2, 13, lang, fmt.Sprintf("fill:%v;font-size:12;text-anchor:middle", color))
+	s.Gend()
+	s.End()
+}
+
 func (d Draw) banner(filePath string, color string, lang string) {
 	out, err := os.Create(filePath)
 	utils.CheckErr(err)
@@ -65,7 +78,7 @@ func (d Draw) banner(filePath string, color string, lang string) {
 	s.Start(8 + len(lang) * 7, 18)
 	s.Roundrect(0, 0, 8 + len(lang) * 7, 18, 4, 4, fmt.Sprintf("fill:%v;", color))
 	s.Gstyle("font-family:monospace;font-weight:bold;")
-	s.Text(4 + len(lang) * 7 / 2, 13, lang, fmt.Sprintf("fill:%v;font-size:12;text-anchor:middle", "#ffffff"))
+	s.Text(4 + len(lang) * 7 / 2, 13, lang, fmt.Sprintf("fill:#ffffff;font-size:12;text-anchor:middle"))
 	s.Gend()
 	s.End()
 }

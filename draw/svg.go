@@ -62,8 +62,10 @@ func (d Draw) banner(filePath string, color string, lang string) {
 	out, err := os.Create(filePath)
 	utils.CheckErr(err)
 	s := svg.New(out)
-	s.Start(len(lang) * 10, 20)
-	s.Roundrect(0, 0, len(lang) * 10, 20, 4, 4, fmt.Sprintf("fill:%v;", color))
-	s.Text(4, 14, lang, fmt.Sprintf("fill:%v;font-size:12", "#ffffff"))
+	s.Start(len(lang) * 8, 18)
+	s.Roundrect(0, 0, len(lang) * 8, 18, 4, 4, fmt.Sprintf("fill:%v;", color))
+	s.Gstyle("font-family:monospace;font-weight:bold;")
+	s.Text(len(lang) * 8 / 2, 14, lang, fmt.Sprintf("fill:%v;font-size:12;text-anchor:middle", "#ffffff"))
+	s.Gend()
 	s.End()
 }

@@ -17,7 +17,7 @@ type Config struct {
 
 type Lang struct {
 	// hex code
-	color string
+	Color string
 }
 
 const langSrcFile = "languages.yml"

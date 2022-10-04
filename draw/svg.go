@@ -22,9 +22,10 @@ func (d Draw) Build() {
 	d.clean()
 
 	for k, v := range d.config.Langs {
-		d.image(fmt.Sprintf("images/dot/%v.svg", k), v.Color)
-		d.banner(fmt.Sprintf("images/banner/%v.svg", k), k, v.Color)
+		d.dot(fmt.Sprintf("images/dot/%v.svg", k), v.Color)
+		d.banner(fmt.Sprintf("images/banner/%v.svg", k), v.Color, k)
 	}
+	d.blankDot(fmt.Sprintf("images/dot/None.svg"), "#000000")
 }
 
 func (d Draw) clean() {
@@ -39,7 +40,16 @@ func (d Draw) clean() {
 	utils.CheckErr(err)
 }
 
-func (d Draw) image(filePath string, color string) {
+func (d Draw) blankDot(filePath string, color string) {
+	out, err := os.Create(filePath)
+	utils.CheckErr(err)
+	s := svg.New(out)
+	s.Start(16, 16)
+	s.Circle(8, 8, 7, fmt.Sprintf("fill:none;stroke:%v;", color))
+	s.End()
+}
+
+func (d Draw) dot(filePath string, color string) {
 	out, err := os.Create(filePath)
 	utils.CheckErr(err)
 	s := svg.New(out)
@@ -48,7 +58,7 @@ func (d Draw) image(filePath string, color string) {
 	s.End()
 }
 
-func (d Draw) banner(filePath string, lang string, color string) {
+func (d Draw) banner(filePath string, color string, lang string) {
 	out, err := os.Create(filePath)
 	utils.CheckErr(err)
 	s := svg.New(out)

@@ -9,5 +9,7 @@ import (
 
 func main() {
 	c := config.New()
-	draw.New(c).Build()
+	draw := draw.New(c)
+	draw.Build()
+	draw.WriteReadme()
 }

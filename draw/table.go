@@ -1,6 +1,7 @@
 package draw
 
 import (
+	"sort"
 	"fmt"
 	"github.com/olekukonko/tablewriter"
 	"io"
@@ -31,7 +32,15 @@ func (d Draw) colorTable(w io.Writer) {
 	table.SetAutoWrapText(false)
 	table.SetAutoFormatHeaders(false)
 
-	for k, v := range d.config.Langs {
+	// Memo: for fixing order
+	var keys []string
+	for k, _ := range d.config.Langs {
+		keys = append(keys, k)
+	}
+	sort.Slice(keys, func(i int , j int) bool { return keys[i] < keys[j] })
+
+	for _, k := range keys {
+		v := d.config.Langs[k]
 		table.Append(d.colorContent(k, v.Color))
 	}
 	table.Render()

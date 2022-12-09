@@ -1,12 +1,13 @@
 package draw
 
 import (
-	"sort"
 	"fmt"
-	"github.com/olekukonko/tablewriter"
 	"io"
 	"os"
-	"maru/utils"
+	"sort"
+
+	"github.com/kijimaD/maru/utils"
+	"github.com/olekukonko/tablewriter"
 )
 
 func (d Draw) WriteReadme() {
@@ -37,7 +38,7 @@ func (d Draw) colorTable(w io.Writer) {
 	for k, _ := range d.config.Langs {
 		keys = append(keys, k)
 	}
-	sort.Slice(keys, func(i int , j int) bool { return keys[i] < keys[j] })
+	sort.Slice(keys, func(i int, j int) bool { return keys[i] < keys[j] })
 
 	for _, k := range keys {
 		v := d.config.Langs[k]

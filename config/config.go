@@ -4,13 +4,14 @@ package config
 
 import (
 	"fmt"
-	"strings"
-	"os"
-	"io/ioutil"
 	"io"
-	"gopkg.in/yaml.v2"
+	"io/ioutil"
 	"net/http"
-	"maru/utils"
+	"os"
+	"strings"
+
+	"github.com/kijimaD/maru/utils"
+	"gopkg.in/yaml.v2"
 )
 
 type Config struct {
@@ -26,7 +27,7 @@ const langSrcFile = "languages.yml"
 const langSrcURL = "https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml"
 
 func New() Config {
-	return Config {
+	return Config{
 		Langs: getGithubColors(),
 	}
 }

@@ -1,11 +1,13 @@
 package draw
 
 import (
-	"maru/config"
-	"github.com/ajstarks/svgo"
-	"os"
-	"maru/utils"
 	"fmt"
+	"os"
+
+	"github.com/kijimaD/maru/config"
+	"github.com/kijimaD/maru/utils"
+
+	svg "github.com/ajstarks/svgo"
 )
 
 type Draw struct {
@@ -13,7 +15,7 @@ type Draw struct {
 }
 
 func New(config config.Config) Draw {
-	return Draw {
+	return Draw{
 		config: config,
 	}
 }
@@ -63,10 +65,10 @@ func (d Draw) blankBanner(filePath string, color string, lang string) {
 	out, err := os.Create(filePath)
 	utils.CheckErr(err)
 	s := svg.New(out)
-	s.Start(8 + len(lang) * 7, 18)
-	s.Roundrect(0, 0, 8 + len(lang) * 7, 18, 4, 4, fmt.Sprintf("fill:none;stroke:%v;", color))
+	s.Start(8+len(lang)*7, 18)
+	s.Roundrect(0, 0, 8+len(lang)*7, 18, 4, 4, fmt.Sprintf("fill:none;stroke:%v;", color))
 	s.Gstyle("font-family:monospace;font-weight:bold;")
-	s.Text(4 + len(lang) * 7 / 2, 13, lang, fmt.Sprintf("fill:%v;font-size:12;text-anchor:middle", color))
+	s.Text(4+len(lang)*7/2, 13, lang, fmt.Sprintf("fill:%v;font-size:12;text-anchor:middle", color))
 	s.Gend()
 	s.End()
 }
@@ -75,10 +77,10 @@ func (d Draw) banner(filePath string, color string, lang string) {
 	out, err := os.Create(filePath)
 	utils.CheckErr(err)
 	s := svg.New(out)
-	s.Start(8 + len(lang) * 7, 18)
-	s.Roundrect(0, 0, 8 + len(lang) * 7, 18, 4, 4, fmt.Sprintf("fill:%v;", color))
+	s.Start(8+len(lang)*7, 18)
+	s.Roundrect(0, 0, 8+len(lang)*7, 18, 4, 4, fmt.Sprintf("fill:%v;", color))
 	s.Gstyle("font-family:monospace;font-weight:bold;")
-	s.Text(4 + len(lang) * 7 / 2, 13, lang, fmt.Sprintf("fill:#ffffff;font-size:12;text-anchor:middle"))
+	s.Text(4+len(lang)*7/2, 13, lang, fmt.Sprintf("fill:#ffffff;font-size:12;text-anchor:middle"))
 	s.Gend()
 	s.End()
 }

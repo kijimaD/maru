@@ -1,8 +1,8 @@
 package main
 
 import (
-	"maru/config"
-	"maru/draw"
+	"github.com/kijimaD/maru/config"
+	"github.com/kijimaD/maru/draw"
 )
 
 func main() {
